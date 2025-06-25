@@ -1,0 +1,21 @@
+class TasksController < ApplicationController
+  def new
+    @task = Task.new
+  end
+
+  def create
+    @task = Task.new(task_params)
+    @task.user_id = current_user.id
+    if @task.save!
+      redirect_to root_path, notice: "Task created!"
+    else
+      redirect_to root_path, notice: "Unable to perform that right now!"
+    end
+  end
+
+  private
+
+  def task_params
+    params.require(:task).permit(:name, :status, :end_date, :priority, :user_id)
+  end
+end

@@ -1,2 +1,121 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="nav_bar">
+  <div class="nav_heading">
+    <h1>My Space</h1>
+  </div>
+
+  <div class="nav-item">
+    <i class="bi bi-house nav_icon"></i><p>Dashboard</p>
+  </div>
+
+  <div class="nav-item">
+    <i class="bi bi-list-task nav_icon"></i><p>Tasks</p>
+  </div>
+
+  <div class="nav-item">
+    <i class="bi bi-newspaper nav_icon"></i><p>Projects</p>
+  </div>
+
+  <div class="nav-item">
+    <i class="bi bi-chat-left-dots nav_icon"></i><p>Messages</p>
+  </div>
+
+  <div class="nav-item">
+    <i class="bi bi-moon nav_icon"></i><p>Sleep mode</p>
+  </div>
+
+</div>
+
+
+<div class="dashboard_nav">
+  <h1>Good morning James ☀️</h1>
+  <div class="dash_icons">
+    <i class="bi bi-chat-left-dots"></i>
+    <i class="bi bi-bell"></i>
+    <i class="bi bi-person-circle"></i>
+  </div>
+</div>
+<div class="dash_search">
+  <i class="bi bi-search"></i>
+  <p>Search for a keyword...</p>
+</div>
+
+<div class="stats">
+
+  <div class="stat_card">
+    <h4>  <i class="bi bi-list-task nav_icon"></i> Total tasks</h4>
+    <h2><%= @tasks.count %></h2>
+  </div>
+
+  <div class="stat_card">
+    <h4> <i class="bi bi-check2-square nav_icon"></i>Completed</h4>
+    <h2>126</h2>
+  </div>
+
+  <div class="stat_card">
+    <h4> <i class="bi bi-archive nav_icon"></i>To do</h4>
+    <h2>6</h2>
+  </div>
+
+  <div class="stat_card">
+    <h4><i class="bi bi-alarm nav_icon"></i></i>Urgent tasks</h4>
+    <h2>2</h2>
+  </div>
+
+</div>
+
+<div class="recent_tasks">
+  <i class="bi bi-journal-text nav_icon"></i>
+  <h2>Recent Tasks</h2>
+  <div class="add_task">
+    <p type="button" class="btn" id="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Add task
+    </p>
+  </div>
+</div>
+
+<%# modal for task show %>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Busy day?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <%= simple_form_for @task do |f| %>
+        <div class="modal-body">
+          <%= f.input :name, label: false, placeholder: "Name of task..." %>
+          <%= f.input :status, as: :select, collection: ['To do', 'inprogress', 'complete'], label: false, prompt: "Select status.." %>
+          <%= f.input :priority, as: :select, collection: ['Low', 'Medium', 'High', "Urgent"], label: false, prompt: "Select priority.." %>
+          <%= f.input :end_date, label: false, placeholder: "Due date..." %>
+        </div>
+        <div class="modal-footer">
+          <%= f.button :submit %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="tasks">
+  <% @tasks.each do |task| %>
+    <div class="task">
+      <div class="task_top">
+        <h4><%= task.name %></h4>
+        <i class="fa-solid fa-ellipsis nav_icon"></i>
+      </div>
+
+      <div class="task_details">
+        <i class="bi bi-calendar-event"></i>
+        <%= task.end_date %>
+        <i class="bi bi-person-circle"></i>
+        <p>Assigned to you</p>
+      </div>
+      <div class="task_status">
+        <p class="status"><%= task.status %></p>
+        <p class="priority">  <%= task.priority  %></p>
+      </div>
+    </div>
+<% end %>
+
+</div>
