@@ -13,9 +13,18 @@ class TasksController < ApplicationController
     end
   end
 
+  def update
+    @task = Task.find(params[:id])
+    if @task.update(task_params)
+      redirect_to root_path, notice: "Task updated!"
+    else
+      redirect_to root_path, alert: "Unable to update task."
+    end
+  end
+
   private
 
   def task_params
-    params.require(:task).permit(:name, :status, :end_date, :priority, :user_id)
+    params.require(:task).permit(:name, :status, :end_date, :priority, :user_id, :description)
   end
 end

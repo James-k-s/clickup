@@ -9,11 +9,13 @@
 #   end
 
 puts "Clearing all records..."
-
+TaskComment.destroy_all
 Task.destroy_all
 User.destroy_all
 
 james = User.new(
+  first_name: "James",
+  last_name: "Shuttleworth",
   email: "james@james.com",
   password: "password",
   password_confirmation: "password"
@@ -24,15 +26,17 @@ puts "Users created, #{User.all.count} total users"
 
 task1 = Task.new(
   name: "Brush teeeth",
-  priority: "Urgent",
-  status: "To be done",
+  description: "Brush your teeth thoroughly for at least two minutes to maintain good oral hygiene. Don’t forget to brush all surfaces and your tongue!",
+  priority: "Medium",
+  status: "To do",
   end_date: "Today!",
   user_id: james.id
 )
 
 task2 = Task.new(
   name: "Finish app",
-  priority: "Urgent",
+  description: "Complete all remaining features, fix any outstanding bugs, and ensure the application is ready for deployment. Review the project requirements and test thoroughly before launch.",
+  priority: "High",
   status: "In progress",
   end_date: "Friday",
   user_id: james.id
@@ -40,6 +44,7 @@ task2 = Task.new(
 
 task3 = Task.new(
   name: "Get a Job",
+  description: "Search and apply for relevant job opportunities, tailor your resume and cover letter, and prepare for interviews to secure a new position.",
   priority: "Urgent",
   status: "In progress",
   end_date: "31 June 2025",
@@ -48,8 +53,9 @@ task3 = Task.new(
 
 task4 = Task.new(
   name: "Make dinner",
-  priority: "Not urgent",
-  status: "Tobe done",
+  description: "Prepare a healthy and delicious meal for yourself or your family. Plan the menu, gather ingredients, and enjoy the cooking process.",
+  priority: "Low",
+  status: "To do",
   end_date: "6pm",
   user_id: james.id
 )
@@ -58,6 +64,29 @@ task1.save!
 task2.save!
 task3.save!
 task4.save!
+puts "creating task comments"
+
+task_comment1 = TaskComment.new(
+  comment: "make sure it is done before 8pm",
+  task_id: task1.id
+)
+
+task_comment2 = TaskComment.new(
+  comment: "Do not eat anything after you have brushed your teeth",
+  task_id: task1.id
+)
+
+task_comment3 = TaskComment.new(
+  comment: "Brushing your teeth will make them perals white",
+  task_id: task1.id
+)
+
+
+task_comment1.save!
+task_comment2.save!
+task_comment3.save!
+puts "comments created, #{TaskComment.all.count} total comments"
+
 
 puts "Tasks created, #{Task.all.count} total tasks"
 

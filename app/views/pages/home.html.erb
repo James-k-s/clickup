@@ -1,33 +1,5 @@
-<div class="nav_bar">
-  <div class="nav_heading">
-    <h1>My Space</h1>
-  </div>
-
-  <div class="nav-item">
-    <i class="bi bi-house nav_icon"></i><p>Dashboard</p>
-  </div>
-
-  <div class="nav-item">
-    <i class="bi bi-list-task nav_icon"></i><p>Tasks</p>
-  </div>
-
-  <div class="nav-item">
-    <i class="bi bi-newspaper nav_icon"></i><p>Projects</p>
-  </div>
-
-  <div class="nav-item">
-    <i class="bi bi-chat-left-dots nav_icon"></i><p>Messages</p>
-  </div>
-
-  <div class="nav-item">
-    <i class="bi bi-moon nav_icon"></i><p>Sleep mode</p>
-  </div>
-
-</div>
-
-
 <div class="dashboard_nav">
-  <h1>Good morning James ☀️</h1>
+  <h1>Good morning <%= @user_name %> ☀️</h1>
   <div class="dash_icons">
     <i class="bi bi-chat-left-dots"></i>
     <i class="bi bi-bell"></i>
@@ -48,17 +20,17 @@
 
   <div class="stat_card">
     <h4> <i class="bi bi-check2-square nav_icon"></i>Completed</h4>
-    <h2>126</h2>
+    <h2><%= @tasks.where(status: "Completed").count %></h2>
   </div>
 
   <div class="stat_card">
     <h4> <i class="bi bi-archive nav_icon"></i>To do</h4>
-    <h2>6</h2>
+    <h2><%= @tasks.where(status: "To do").count %></h2>
   </div>
 
   <div class="stat_card">
     <h4><i class="bi bi-alarm nav_icon"></i></i>Urgent tasks</h4>
-    <h2>2</h2>
+    <h2><%= @tasks.where(priority: "Urgent").count%></h2>
   </div>
 
 </div>
@@ -67,41 +39,46 @@
   <i class="bi bi-journal-text nav_icon"></i>
   <h2>Recent Tasks</h2>
   <div class="add_task">
-    <p type="button" class="btn" id="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <p type="button" class="btn" id="btn" data-bs-toggle="modal" data-bs-target="#addTaskModal">
       Add task
     </p>
   </div>
 </div>
 
 <%# modal for task show %>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="taskheader">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Busy day?</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <%= simple_form_for @task do |f| %>
-        <div class="modal-body">
+        <div class="modal-body" id="updateTask">
           <%= f.input :name, label: false, placeholder: "Name of task..." %>
-          <%= f.input :status, as: :select, collection: ['To do', 'inprogress', 'complete'], label: false, prompt: "Select status.." %>
+          <%= f.input :description, label: false, placeholder: "Description of task..." %>
+          <%= f.input :status, as: :select, collection: ['To do', 'In progress', 'Completed'], label: false, prompt: "Select status.." %>
           <%= f.input :priority, as: :select, collection: ['Low', 'Medium', 'High', "Urgent"], label: false, prompt: "Select priority.." %>
           <%= f.input :end_date, label: false, placeholder: "Due date..." %>
         </div>
-        <div class="modal-footer">
+        <div class="modalfooter" id="footerUpdate">
           <%= f.button :submit %>
         </div>
       <% end %>
     </div>
   </div>
 </div>
+<%# modal end %>
 
 <div class="tasks">
   <% @tasks.each do |task| %>
-    <div class="task">
+    <div class="task"  data-bs-toggle="modal" data-bs-target="#taskShowModal_<%= task.id %>">
       <div class="task_top">
-        <h4><%= task.name %></h4>
+        <% if task.status == "Completed" %>
+          <h4><s><%= task.name %></s> ✅</h4>
+        <% else %>
+          <h4><%= task.name %></h4>
+        <% end %>
         <i class="fa-solid fa-ellipsis nav_icon"></i>
       </div>
 
@@ -112,10 +89,93 @@
         <p>Assigned to you</p>
       </div>
       <div class="task_status">
-        <p class="status"><%= task.status %></p>
-        <p class="priority">  <%= task.priority  %></p>
+        <% if task.status == "To do" %>
+          <p class="status to-be-done"><%= task.status %></p>
+        <% elsif task.status == "In progress" %>
+          <p class="status in-progress"><%= task.status %></p>
+        <% else %>
+          <p class="status completed"><%= task.status %></p>
+        <% end %>
+        <% if task.priority == "Low" %>
+          <p class="priority low">  <%= task.priority  %></p>
+        <% elsif task.priority == "Medium" %>
+          <p class="priority medium">  <%= task.priority  %></p>
+        <% elsif task.priority == "High" %>
+          <p class="priority high">  <%= task.priority  %></p>
+        <% else %>
+          <p class="priority urgent">  <%= task.priority  %></p>
+        <% end %>
       </div>
     </div>
+
+    <%# modal for task show %>
+    <div class="modal fade" id="taskShowModal_<%= task.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content" id="taskModal">
+          <div class="taskheader">
+            <h1><%= task.name %></h1>
+            <div class="taskicons">
+              <i class="bi bi-pencil" data-bs-toggle="modal" data-bs-target="#updateTaskModal_<%= task.id%>"></i>
+              <i class="bi bi-trash"></i>
+              <i class="bi bi-x-circle" data-bs-dismiss="modal" aria-label="Close"></i>
+            </div>
+          </div>
+          <div class="modal-body" id="task-modal-body">
+            <div class="leftTask">
+              <p><%= task.description %></p>
+            </div>
+            <div class="rightTask">
+              <div class="taskcomments">
+                <h3>Task comments</h3>
+              </div>
+              <div class="comments">
+                <% task.task_comments.each do |comment| %>
+                  <div class="comment">
+                    <%= comment.comment %>
+                  </div>
+                <% end %>
+              </div>
+              <div class="addTaskComment">
+                <%= simple_form_for([task, TaskComment.new]) do |f| %>
+                  <%= f.input :comment,id: "taskinput", label: false, placeholder: "Write a comment..." %>
+                  <%= f.button :submit, "Add Comment" %>
+                <% end %>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <%# modal end %>
+
+    <%# modal for update task %>
+    <div class="modal fade" id="updateTaskModal_<%= task.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="taskheader">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+            <%= simple_form_for task, url: task_path(task), method: :patch do |f| %>
+            <div class="modal-body" id="updateTask">
+
+                <%= f.input :name, label: false, placeholder: "Name of task..."%>
+                <%= f.input :description, label: false, placeholder: "Description of task..."%>
+                <%= f.input :status, label: false, placeholder: "Status of task...", as: :select, collection: ['To do', 'In progress', 'Completed'], prompt: "Select status..." %>
+                <%= f.input :priority,label: false, placeholder: "Priority of task..." , as: :select, collection: ['Low', 'Medium', 'High', 'Urgent'], prompt: "Select priority..." %>
+                <%= f.input :end_date, placeholder: "End date of task...", label: false %>
+          </div>
+              <div class="modalfooter" id="footerUpdate">
+                <%= f.button :submit, "Save changes" %>
+              </div>
+            <% end %>
+        </div>
+      </div>
+    </div>
+    <%# modal update task end %>
+
 <% end %>
 
 </div>
