@@ -3,32 +3,42 @@
   <div class="dash_icons">
     <i class="bi bi-chat-left-dots"></i>
     <i class="bi bi-bell"></i>
-    <i class="bi bi-person-circle"></i>
+     <div class="dropdown" style="display: inline;">
+        <i class="bi bi-person-circle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"></i>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+          <li><%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %></li>
+          <li><%= link_to "Logout", destroy_user_session_path, class: "dropdown-item", data: { turbo: false } %></li>
+        </ul>
+      </div>
   </div>
 </div>
-<div class="dash_search">
+<div class="dash_search new-card-style">
   <i class="bi bi-search"></i>
   <p>Search for a keyword...</p>
 </div>
+  <ul>
+    <li>Login</li>
+    <li>Logout</li>
+  </ul>
 
 <div class="stats">
 
-  <div class="stat_card">
+  <div class="stat_card new-card-style">
     <h4>  <i class="bi bi-list-task nav_icon"></i> Total tasks</h4>
     <h2><%= @tasks.count %></h2>
   </div>
 
-  <div class="stat_card">
+  <div class="stat_card new-card-style">
     <h4> <i class="bi bi-check2-square nav_icon"></i>Completed</h4>
     <h2><%= @tasks.where(status: "Completed").count %></h2>
   </div>
 
-  <div class="stat_card">
+  <div class="stat_card new-card-style">
     <h4> <i class="bi bi-archive nav_icon"></i>To do</h4>
     <h2><%= @tasks.where(status: "To do").count %></h2>
   </div>
 
-  <div class="stat_card">
+  <div class="stat_card new-card-style">
     <h4><i class="bi bi-alarm nav_icon"></i></i>Urgent tasks</h4>
     <h2><%= @tasks.where(priority: "Urgent").count%></h2>
   </div>
@@ -38,7 +48,7 @@
 <div class="recent_tasks">
   <i class="bi bi-journal-text nav_icon"></i>
   <h2>Recent Tasks</h2>
-  <div class="add_task">
+  <div class="add_task new-card-style">
     <p type="button" class="btn" id="btn" data-bs-toggle="modal" data-bs-target="#addTaskModal">
       Add task
     </p>
@@ -72,7 +82,7 @@
 
 <div class="tasks">
   <% @tasks.each do |task| %>
-    <div class="task"  data-bs-toggle="modal" data-bs-target="#taskShowModal_<%= task.id %>">
+    <div class="task new-card-style"  data-bs-toggle="modal" data-bs-target="#taskShowModal_<%= task.id %>">
       <div class="task_top">
         <% if task.status == "Completed" %>
           <h4><s><%= task.name %></s> ✅</h4>
@@ -115,8 +125,8 @@
           <div class="taskheader">
             <h1><%= task.name %></h1>
             <div class="taskicons">
-              <i class="bi bi-pencil" data-bs-toggle="modal" data-bs-target="#updateTaskModal_<%= task.id%>"></i>
-              <i class="bi bi-trash"></i>
+              <i class="bi bi-pencil pencil" data-bs-toggle="modal" data-bs-target="#updateTaskModal_<%= task.id%>"></i>
+              <i class="bi bi-trash trash"></i>
               <i class="bi bi-x-circle" data-bs-dismiss="modal" aria-label="Close"></i>
             </div>
           </div>

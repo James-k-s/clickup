@@ -76,6 +76,60 @@ body {
   }
 }
 
+.new-card-style {
+  border-radius: 10px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+  border: none !important;
+  text-align: center;
+}
+
+.pencil {
+  color: #2196F3;
+}
+
+.trash{
+  color: #F44336;
+}
+
+
+
+.task.new-card-style {
+  border: none !important;
+  text-align: center;
+  background-color: white;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+  cursor: pointer;
+  border-radius: 10px !important;
+}
+
+.task.new-card-style:hover {
+  border: none !important;
+  text-align: center;
+  background-color: white;
+  transform: translateY(-1.8px) scale(1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12), 0 1.5px 4px rgba(0,0,0,0.12);
+  border-radius: 10px !important;
+}
+
+.page.new-card-style {
+  border: none !important;
+  text-align: center;
+  background-color: white;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+  cursor: pointer;
+  border-radius: 10px !important;
+}
+
+.page.new-card-style:hover {
+  border: none !important;
+  text-align: center;
+  background-color: #A3D2B8;
+  transform: translateY(-1.5px) scale(1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12), 0 1.5px 4px rgba(0,0,0,0.12);
+  border-radius: 10px !important;
+}
+
 .dashboard-links {
   text-decoration: none;
   color: black;
