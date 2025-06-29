@@ -10,16 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_25_144208) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_29_203959) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "list_items", force: :cascade do |t|
+    t.bigint "list_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description"
+    t.string "status"
+    t.index ["list_id"], name: "index_list_items_on_list_id"
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.string "status"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_lists_on_user_id"
+  end
 
   create_table "task_comments", force: :cascade do |t|
     t.string "comment"
     t.bigint "task_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["task_id"], name: "index_task_comments_on_task_id"
+    t.index ["user_id"], name: "index_task_comments_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -48,6 +69,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_25_144208) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "list_items", "lists"
+  add_foreign_key "lists", "users"
   add_foreign_key "task_comments", "tasks"
+  add_foreign_key "task_comments", "users"
   add_foreign_key "tasks", "users"
 end
