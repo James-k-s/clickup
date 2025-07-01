@@ -1,7 +1,4 @@
-<div class="dash_search new-card-style">
-  <i class="bi bi-search"></i>
-  <p>Search for a keyword...</p>
-</div>
+
 
 <div class="recent_tasks your-lists">
   <i class="bi bi-journal-text nav_icon"></i>
@@ -19,13 +16,13 @@
       <div class="list new-card-style-no-center" data-bs-toggle="collapse" href="#collapselist_<%= list.id %>" role="button" aria-expanded="false" aria-controls="collapseExamplecollapselist_<%= list.id %>" >
         <div class="listname">
           <i class="bi bi-caret-right"></i>
-          <h4><%= list.name %></h4>
+            <h4><%= list.name %></h4>
         </div>
         <div class="listActions">
-          <i class="bi bi-plus-lg"></i>
-          <i class="bi bi-pencil pencil" data-bs-toggle="modal" data-bs-target="#updateTaskModal_<%= list.id%>"></i>
+          <i class="bi bi-plus-lg" data-bs-toggle="modal" data-bs-target="#addListItemModal_<%= list.id%>"></i>
+          <i class="bi bi-pencil pencil" data-bs-toggle="modal" data-bs-target="#updateListModal_<%= list.id%>"></i>
           <i class="bi bi-trash trash"></i>
-          <i class="bi bi-x-circle" data-bs-dismiss="modal" aria-label="Close"></i>
+
         </div>
       </div>
        <div class="collapse collapse-list-item" id="collapselist_<%= list.id %>">
@@ -40,6 +37,52 @@
           </div>
         </div>
     </div>
+
+    <!--  modal for updating list -->
+    <div class="modal fade" id="updateListModal_<%= list.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="taskheader">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Update list</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <%= simple_form_for list, url: list_path(list), method: :patch do |f| %>
+            <div class="modal-body" id="updateTask">
+              <%= f.input :name, label: false, placeholder: "Name of list..." %>
+              <%= f.input :status, as: :select, collection: ['Incomplete', 'Complete'], label: false, prompt: "Select status.." %>
+            </div>
+            <div class="modalfooter" id="footerUpdate">
+              <%= f.button :submit, "Save" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!-- end-->
+
+
+    <!-- modal for adding a list item -->
+    <div class="modal fade" id="addListItemModal_<%= list.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="taskheader">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add list item</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <%= simple_form_for ([list, ListItem.new]) do |f| %>
+            <div class="modal-body" id="updateTask">
+              <%= f.input :description, label: false, placeholder: "Name of list item..." %>
+              <%= f.input :status, as: :select, collection: ['Incomplete', 'Complete'], label: false, prompt: "Select status.." %>
+            </div>
+            <div class="modalfooter" id="footerUpdate">
+              <%= f.button :submit, "Save" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- end-->
   <% end %>
 </div>
 
@@ -54,11 +97,12 @@
       <%= simple_form_for @list , url: lists_path do |f| %>
         <div class="modal-body" id="updateTask">
           <%= f.input :name, label: false, placeholder: "Name of list..." %>
-          <%= f.input :status, as: :select, collection: ['incomplete', 'Complete'], label: false, prompt: "Select status.." %>
+          <%= f.input :status, as: :select, collection: ['Incomplete', 'Complete'], label: false, prompt: "Select status.." %>
         </div>
         <div class="modalfooter" id="footerUpdate">
           <%= f.button :submit %>
         </div>
+
       <% end %>
     </div>
   </div>

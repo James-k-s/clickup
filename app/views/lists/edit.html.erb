@@ -1,0 +1,9 @@
+<%= form_with model: @list do |f| %>
+  <% frame_id = dom_id(@list, "name_turbo_frame") %>
+  <%= turbo_frame_tag frame_id do %>
+
+    <%= f.text_field :name, placeholder: "Name of list..." %>
+    <%= f.select :status, ['Incomplete', 'Complete'], prompt: "Select status.." %>
+    <%= f.submit "Save", class: "btn btn-primary" %>
+  <% end %>
+<% end %>

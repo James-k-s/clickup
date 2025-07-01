@@ -1,4 +1,19 @@
 class TasksController < ApplicationController
+
+
+  def index
+    if current_user
+      @user_name = current_user.first_name
+      @taskcomments = current_user.task_comments
+      @task = Task.new
+      @tasks = current_user.tasks.order(created_at: :desc)
+    else
+      @user_name = ""
+      redirect_to new_user_session_path
+
+    end
+  end
+
   def new
     if current_user
       @task = Task.new
@@ -11,18 +26,18 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user_id = current_user.id
     if @task.save!
-      redirect_to root_path, notice: "Task created!"
+      redirect_to tasks_path, notice: "Task created!"
     else
-      redirect_to root_path, notice: "Unable to perform that right now!"
+      redirect_to tasks_path, notice: "Unable to perform that right now!"
     end
   end
 
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
-      redirect_to root_path, notice: "Task updated!"
+      redirect_to tasks_path, notice: "Task updated!"
     else
-      redirect_to root_path, alert: "Unable to update task."
+      redirect_to tasks_path, alert: "Unable to update task."
     end
   end
 
