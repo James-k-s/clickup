@@ -37,13 +37,16 @@
   </div>
   <% end %>
 
+<%= link_to habbit_trackers_path, class: "dashboard-links" do %>
+  <div class="nav-item new-card-style page">
+    <i class="bi bi-bar-chart nav_icon"></i><p>Habbit Tracker</p>
+  </div>
+<% end %>
+
   <div class="nav-item new-card-style page">
     <i class="bi bi-newspaper nav_icon"></i><p>Projects</p>
   </div>
 
-  <div class="nav-item new-card-style page">
-    <i class="bi bi-chat-left-dots nav_icon"></i><p>Messages</p>
-  </div>
 
   <div class="nav-item new-card-style page">
     <i class="bi bi-moon nav_icon"></i><p>Sleep mode</p>
@@ -51,21 +54,6 @@
 
 
 </div>
-<div class="dashboard_nav">
-  <h1>Good morning <%= @user_name %> ☀️</h1>
-  <div class="dash_icons">
-    <i class="bi bi-chat-left-dots"></i>
-    <i class="bi bi-bell"></i>
-     <div class="dropdown" style="display: inline;">
-        <i class="bi bi-person-circle" id="navbarDropdown" data-bs-toggle="dropdown" aria-expanded="false"></i>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-          <li><%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %></li>
-          <li><%= link_to "Logout", destroy_user_session_path, class: "dropdown-item", data: { turbo: false } %></li>
-        </ul>
-      </div>
-  </div>
-</div>
-
     <%= yield %>
   </body>
 </html>

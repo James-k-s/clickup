@@ -10,9 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_29_203959) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_01_110856) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "habit_items", force: :cascade do |t|
+    t.bigint "habit_tracker_id", null: false
+    t.string "name"
+    t.text "notes"
+    t.string "frequency"
+    t.integer "target_per_day", default: 1
+    t.boolean "reminder", default: false
+    t.time "reminder_time"
+    t.boolean "archived", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_tracker_id"], name: "index_habit_items_on_habit_tracker_id"
+  end
+
+  create_table "habit_logs", force: :cascade do |t|
+    t.bigint "habit_item_id", null: false
+    t.date "date"
+    t.integer "times_completed", default: 0
+    t.boolean "completed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_item_id"], name: "index_habit_logs_on_habit_item_id"
+  end
+
+  create_table "habit_trackers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.text "description"
+    t.boolean "archived", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_habit_trackers_on_user_id"
+  end
 
   create_table "list_items", force: :cascade do |t|
     t.bigint "list_id", null: false
@@ -69,6 +103,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_29_203959) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "habit_items", "habit_trackers"
+  add_foreign_key "habit_logs", "habit_items"
+  add_foreign_key "habit_trackers", "users"
   add_foreign_key "list_items", "lists"
   add_foreign_key "lists", "users"
   add_foreign_key "task_comments", "tasks"

@@ -1,0 +1,85 @@
+
+<div class="recent_tasks your-lists">
+  <i class="bi bi-journal-text nav_icon"></i>
+  <h2>Habit Tracker</h2>
+</div>
+<div class="heading-sub">
+  <p>Build better habits, one day at a time
+</p>
+</div>
+
+<div class="habit-stats">
+
+  <div class="habit-stat stat-card new-card-style">
+    <h4>Today's progress</h4>
+    <h5><%= @total_habit_items_today %>/<%= @total_habit_items %></h5>
+  </div>
+
+  <div class="habit-stat stat-card new-card-style">
+    <h4>Total Habits</h4>
+    <h5><%= @total_habit_items %></h5>
+  </div>
+
+  <div class="habit-stat stat-card new-card-style">
+    <h4>Total streaks</h4>
+    <h5><%= @total_streaks_above_two %></h5>
+  </div>
+
+  <div class="habit-stat stat-card new-card-style">
+    <h4>Completion rate</h4>
+    <h5><%= ((@total_habit_items_today.to_f / @total_habit_items) *100).round%>%</h5>
+  </div>
+
+</div>
+
+<div class="recent_tasks your-lists">
+  <i class="bi bi-journal-text nav_icon"></i>
+  <h3>Your Habit Groups</h3>
+  <div class="add_task new-card-style">
+    <p type="button" class="btn" id="btn" data-bs-toggle="modal" data-bs-target="#addListModal">
+      Add group
+    </p>
+  </div>
+</div>
+
+<div class="habit-cards">
+  <% @habits.each do |habit| %>
+    <div class="habit-card new-card-style">
+      <div class="habit-top-heading">
+        <div class="habit-card-title">
+          <i class="bi bi-dot habit-dot-status"></i>
+          <h2><%= habit.name %></h2>
+        </div>
+        <div class="add-habbit-button">
+          <i class="bi bi-plus" id="add-habit-status-icon"></i>
+
+        </div>
+      </div>
+      <div class="progess-habit-container">
+        <div class="progress" id="habit-bar">
+          <div class="progress-bar" role="progressbar" style="width:<%= habit.today_progress_percent %>%" aria-valuenow="<%= habit.today_progress_percent %>" aria-valuemin="0" aria-valuemax="100"><%= habit.today_progress_percent %>%</div>
+        </div>
+      </div>
+      <div class="habit_items_container">
+        <% habit.habit_items.each do |habit_item| %>
+          <%= turbo_frame_tag "habit_item_#{habit_item.id}", class: "turbo-frame-habit", autoscroll: false do %>
+            <%= render partial: "habbit_trackers/habit_item", locals: { habit_item: habit_item } %>
+          <% end %>
+        <% end %>
+      </div>
+
+    </div>
+
+  <% end %>
+</div>
+
+
+
+<%#
+<div class="habits"> %>
+  <%# <% @habits.each do |habit| %>
+    <%# <div class="habit-card"> %>
+      <%# <h2><%= habit.name %
+    <%# </div> %>
+  <%# <% end %>
+<%# </div> %>
