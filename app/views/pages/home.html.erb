@@ -12,3 +12,37 @@
       </div>
   </div>
 </div>
+
+<div class="home-container">
+  <div class="banner">
+    <p>Your Personal Productivity Companion</p>
+    <h1> Stay organized, stay productive</h1>
+    <p>With ClickUp, you can manage your tasks, track your habits, and boost your productivity all in one place.</p>
+    <div class="home-buttons">
+      <%= link_to "Start planning today", tasks_path, class: "btn btn-primary" %>
+      <%= link_to "Track your habits", habit_items_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+
+  <div class="home-cards">
+    <div class="card">
+      <h2>Organize Tasks</h2>
+      <p>Organize your day with intelligent task scheduling and time management</p>
+      <%= link_to "View Tasks", tasks_path, class: "btn btn-primary" %>
+    </div>
+
+    <div class="card">
+      <h2>Track Habits</h2>
+      <p>Build lasting habits with visual progress tracking and streak counters</p>
+      <%= link_to "View Habits", habit_items_path, class: "btn btn-secondary" %>
+    </div>
+
+    <div class="card">
+      <h2>Make lists</h2>
+      <p>Compile lists, set priorities, and keep track of your lists effortlessly.</p>
+      <%= link_to "View Lists", edit_user_registration_path, class: "btn btn-tertiary" %>
+    </div>
+
+  </div>
+
+</div>
