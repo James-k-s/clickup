@@ -7,7 +7,7 @@ class HabitLogsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to habbit_trackers_path } # fallback
+      format.html { redirect_to habit_trackers_path } # fallback
     end
   end
 end

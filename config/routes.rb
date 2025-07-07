@@ -15,16 +15,16 @@ Rails.application.routes.draw do
     resources :task_comments, only: [:create]
   end
 
-  resources :habbit_trackers, only: [:index, :new, :create, :edit, :update] do
-    resources :habbit_items, only: [:create]
+  resources :habit_trackers, only: [:index, :new, :create, :edit, :update] do
+    resources :habit_items, only: [:new, :create]
   end
 
   resources :habit_items do
     post :toggle_today, on: :member, to: 'habit_logs#toggle'
   end
 
+
+
   # Defines the root path route ("/")
   # root "posts#index"
-
-
 end

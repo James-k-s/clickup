@@ -25,6 +25,15 @@ james = User.new(
 )
 james.save!
 
+jade = User.new(
+  first_name: "Jade",
+  last_name: "Derche",
+  email: "jade@jade.com",
+  password: "password",
+  password_confirmation: "password"
+)
+jade.save!
+
 puts "Users created, #{User.all.count} total users"
 
 task1 = Task.new(
@@ -170,31 +179,33 @@ list_item5.save!
 list_item6.save!
 puts "List items created, #{ListItem.all.count} total items"
 
-puts "Creating HabbitTracker records..."
-habbit_tracker1 = HabitTracker.create!(name: "Daily Exercise", user_id: james.id, description: "Track daily exercise habits to maintain physical fitness and well-being.", archived: false)
-habbit_tracker2 = HabitTracker.create!(name: "Read a Book", user_id: james.id, description: "Track reading habits and progress.", archived: false)
-habbit_tracker3 = HabitTracker.create!(name: "Meditation", user_id: james.id, description: "Track meditation habits and mindfulness practice.", archived: false)
+puts "Creating habitTracker records..."
+habit_tracker1 = HabitTracker.create!(name: "Daily Exercise", user_id: james.id, description: "Track daily exercise habits to maintain physical fitness and well-being.", archived: false)
+habit_tracker2 = HabitTracker.create!(name: "Read a Book", user_id: james.id, description: "Track reading habits and progress.", archived: false)
+habit_tracker3 = HabitTracker.create!(name: "Meditation", user_id: james.id, description: "Track meditation habits and mindfulness practice.", archived: false)
 
-habbit_tracker1.save!
-habbit_tracker2.save!
-habbit_tracker3.save!
+habit_tracker1.save!
+habit_tracker2.save!
+habit_tracker3.save!
 puts "Habit trackers created, #{HabitTracker.all.count} total trackers"
 
 puts "Creating HabitItems records..."
 
-habbit_item1 = HabitItem.create!(habit_tracker_id: habbit_tracker1.id, name: "Morning Plank", frequency: "Daily")
-habbit_item2 = HabitItem.create!(habit_tracker_id: habbit_tracker2.id, name: "Read 20 pages", frequency: "Daily")
-habbit_item3 = HabitItem.create!(habit_tracker_id: habbit_tracker3.id, name: "Meditate for 10 minutes", frequency: "Daily")
-habbit_item4 = HabitItem.create!(habit_tracker_id: habbit_tracker1.id, name: "Evening Stretch", frequency: "Daily")
-habbit_item5 = HabitItem.create!(habit_tracker_id: habbit_tracker2.id, name: "Finish the current chapter", frequency: "Daily")
-habbit_item6 = HabitItem.create!(habit_tracker_id: habbit_tracker3.id, name: "Practice deep breathing exercises", frequency: "Daily")
+habit_item1 = HabitItem.create!(habit_tracker_id: habit_tracker1.id, name: "Morning Plank", frequency: "Daily")
+habit_item2 = HabitItem.create!(habit_tracker_id: habit_tracker2.id, name: "Read 20 pages", frequency: "Daily")
+habit_item3 = HabitItem.create!(habit_tracker_id: habit_tracker3.id, name: "Meditate for 10 minutes", frequency: "Daily")
+habit_item4 = HabitItem.create!(habit_tracker_id: habit_tracker1.id, name: "Evening Stretch", frequency: "Daily")
+habit_item5 = HabitItem.create!(habit_tracker_id: habit_tracker2.id, name: "Finish the current chapter", frequency: "Daily")
+habit_item6 = HabitItem.create!(habit_tracker_id: habit_tracker3.id, name: "Practice deep breathing exercises", frequency: "Daily")
 
-habbit_item1.save!
-habbit_item2.save!
-habbit_item3.save!
-habbit_item4.save!
-habbit_item5.save!
-habbit_item6.save!
+habit_item1.save!
+habit_item2.save!
+habit_item3.save!
+habit_item4.save!
+habit_item5.save!
+habit_item6.save!
 puts "Habit items created, #{HabitItem.all.count} total items"
+
+
 
 puts "Seed file has been succesfully created"

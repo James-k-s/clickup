@@ -8,4 +8,6 @@ class User < ApplicationRecord
   has_many :task_comments, dependent: :destroy
   has_many :lists, dependent: :destroy
   has_many :habit_trackers, dependent: :destroy
+  has_many :habit_items, through: :habit_trackers
+  has_many :habit_logs, through: :habit_items
 end

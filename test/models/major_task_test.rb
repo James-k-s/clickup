@@ -1,6 +1,6 @@
 require "test_helper"
 
-class habitTrackersControllerTest < ActionDispatch::IntegrationTest
+class MajorTaskTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

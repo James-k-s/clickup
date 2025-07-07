@@ -6,6 +6,9 @@
 .heading-sub {
     margin-left: 373px;
     width: calc(100% - 280px);
+    p {
+      color: white;
+    }
 }
 
 
@@ -30,7 +33,10 @@
     justify-content: flex-start;
   }
 }
-
+.progress-bar {
+  background-color: #183462;
+  color: white;
+}
 
 .habit-cards {
   margin-top: 24px;
@@ -103,7 +109,9 @@
   width: 100%;
   flex-direction: column;
   align-items: center;
-
+  overflow-y: scroll;
+  height: 240px;
+  max-height: 300px;
 }
 
 .turbo-frame-habit {

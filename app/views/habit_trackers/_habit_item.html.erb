@@ -1,6 +1,6 @@
 
   <div class="habit-item">
-    <div class="habbit-vertiacal-items">
+    <div class="habit-vertiacal-items">
       <div class="habit-item-name">
         <%= form_with url: toggle_today_habit_item_path(habit_item), method: :post, remote: true do %>
           <input type="checkbox" name="completed" <%= "checked" if habit_item.completed_on?(Date.today) %> onchange="this.form.submit()">
@@ -8,9 +8,10 @@
         <label for="checkHabit_<%= habit_item.id %>"></label><%= habit_item.name %>
       </div>
       <div class="habit-streaks">
-        <% (0..6).each do |i| %>
-        <% day = Date.today - i %>
-        <span class="dot <%= 'dot-completed' if habit_item.completed_on?(day) %>"></span>
+        <% start_of_week = Date.today.beginning_of_week(:monday) %>
+        <% 0.upto(6) do |i| %>
+          <% day = start_of_week + i.days %>
+          <span class="dot <%= 'dot-completed' if habit_item.completed_on?(day) %>"></span>
         <% end %>
       </div>
     </div>

@@ -1,4 +1,38 @@
-// Specific CSS for your home-page
+h1 {
+  font-family: "Roboto" !important;
+  font-weight:300 !important;
+  color: white !important;
+}
+h2 {
+  font-family: "Roboto" !important;
+  font-weight:300!important;
+  color: #0F172A;
+}
+h3 {
+  font-family: "Roboto" !important;
+  font-weight:300!important;
+  color: #0F172A;
+}
+h4 {
+  font-family: "Roboto" !important;
+
+  color: #0F172A!important;
+}
+h5 {
+  font-family: "Roboto" !important;
+  color: #0F172A!important;
+}
+h6 {
+  font-family: "Roboto" !important;
+  color: #0F172A!important;
+}
+
+p {
+  font-family: "Roboto" !important;
+  color: #0F172A ;
+}
+
+
 .container {
   display: flex;
   height: 100%;
@@ -6,7 +40,7 @@
 }
 
 body {
-  background-color: #D2D2D2;
+  background-color: #153462;
 }
 
 .dashboard_nav {
@@ -29,6 +63,7 @@ body {
   justify-content: space-evenly;
   width: 280px;
   font-size: 32px;
+  color: white;
 }
 
 .dash_search {
@@ -124,7 +159,7 @@ body {
 .page.new-card-style:hover {
   border: none !important;
   text-align: center;
-  background-color: #A3D2B8;
+  background-color: #ED6A5A;
   transform: translateY(-1.5px) scale(1);
   box-shadow: 0 8px 24px rgba(0,0,0,0.12), 0 1.5px 4px rgba(0,0,0,0.12);
   border-radius: 10px !important;
@@ -143,9 +178,18 @@ body {
   flex-direction: row;
   align-items: center;
   text-align: center;
+  color: white;
   i {
     margin-left: 28px;
     font-size: 24px ;
+  }
+
+  h3 {
+    color:  white;
+  }
+
+  h2 {
+    color: white;
   }
 
   .add_task {
@@ -153,10 +197,9 @@ body {
   right: 85px;
   display: flex;
   font-size: 22px;
-  background-color: white;
   justify-content: center;
   align-items: center;
-  background-color:rgba(163, 210, 184, 0.58) ;
+  background-color:#ED6A5A;
   border-radius: 8px;
   border: solid 0.5px black;
   }
@@ -280,7 +323,7 @@ body {
 
 #btn {
   // padding: 16px;
-  // background-color: #A3D2B8;
+  // background-color: #ED6A5A;
   max-height: 39px;
   text-align: center;
   align-items: center;
@@ -307,7 +350,7 @@ body {
     border-radius: 8px;
   }
   .btn {
-    background-color: #A3D2B8;
+    background-color: #ED6A5A;
   }
 }
 
@@ -318,7 +361,7 @@ body {
   justify-content: flex-end;
   input {
     padding: 8px;
-    background-color: #A3D2B8;
+    background-color: #ED6A5A;
     border-radius: 8px;
     margin: 8px;
   }
