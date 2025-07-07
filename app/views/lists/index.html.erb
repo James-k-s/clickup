@@ -1,3 +1,38 @@
+<div class="nav_bar">
+  <div class="nav_heading">
+    <h1>My Space</h1>
+  </div>
+
+  <%= link_to root_path, class: "dashboard-links" do %>
+  <div class="nav-item new-card-style page">
+    <i class="bi bi-house nav_icon"></i><p>Home</p>
+  </div>
+  <% end %>
+
+  <%= link_to tasks_path, class: "dashboard-links" do %>
+  <div class="nav-item new-card-style page ">
+    <i class="bi bi-card-text nav_icon"></i><p>Tasks</p>
+  </div>
+  <% end %>
+
+  <%= link_to lists_path, class: "dashboard-links" do %>
+  <div class="nav-item new-card-style page">
+    <i class="bi bi-list-task nav_icon"></i><p>Lists</p>
+  </div>
+  <% end %>
+
+<%= link_to habit_trackers_path, class: "dashboard-links" do %>
+  <div class="nav-item new-card-style page">
+    <i class="bi bi-bar-chart nav_icon"></i><p>habit Tracker</p>
+  </div>
+<% end %>
+
+  <div class="nav-item new-card-style page">
+    <i class="bi bi-moon nav_icon"></i><p>Sleep mode</p>
+  </div>
+
+
+</div>
 
 
 <div class="recent_tasks your-lists">
