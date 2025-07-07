@@ -1,3 +1,36 @@
+<div class="recent_tasks your-lists">
+  <i class="bi bi-journal-text nav_icon"></i>
+  <h2>Tasks</h2>
+</div>
+<div class="heading-sub">
+  <p>Manage your tasks, be in control of your day
+</p>
+</div>
+
+
+<div class="stats">
+
+  <div class="stat_card new-card-style">
+    <h4>  <i class="bi bi-list-task nav_icon"></i> Total tasks</h4>
+    <h2><%= @tasks.count %></h2>
+  </div>
+
+  <div class="stat_card new-card-style">
+    <h4> <i class="bi bi-check2-square nav_icon"></i>Completed</h4>
+    <h2><%= @tasks.where(status: "Completed").count %></h2>
+  </div>
+
+  <div class="stat_card new-card-style">
+    <h4> <i class="bi bi-archive nav_icon"></i>To do</h4>
+    <h2><%= @tasks.where(status: "To do").count %></h2>
+  </div>
+
+  <div class="stat_card new-card-style">
+    <h4><i class="bi bi-alarm nav_icon"></i></i>Urgent tasks</h4>
+    <h2><%= @tasks.where(priority: "Urgent").count%></h2>
+  </div>
+
+</div>
 
 <div class="recent_tasks">
   <i class="bi bi-journal-text nav_icon"></i>
