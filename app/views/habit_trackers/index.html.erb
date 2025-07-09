@@ -28,10 +28,11 @@
   </div>
 <% end %>
 
-
+<%= link_to settings_path, class: "dashboard-links" do %>
   <div class="nav-item new-card-style page">
-    <i class="bi bi-moon nav_icon"></i><p>Sleep mode</p>
+    <i class="bi bi-gear nav_icon"></i><p>Settings</p>
   </div>
+<% end %>
 
 
 </div>
@@ -87,7 +88,7 @@
           <h2><%= habit.name %></h2>
         </div>
         <div class="add-habit-button">
-          <i class="bi bi-plus" id="add-habit-status-icon" data-bs-toggle="modal" data-bs-target="#addHabitModal_<%= habit.id %>"></i>
+          <i class="bi bi-plus" id="add-habit-status-icon" data-bs-toggle="modal" data-bs-target="#addHabitModal_<%= habit.id%>"></i>
         </div>
       </div>
       <div class="progess-habit-container">
@@ -104,7 +105,7 @@
       </div>
     </div>
     <%# modal for habit item add %>
-    <div class="modal fade" id="addHabitModal_<%= habit.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addHabitModal_<%= habit.id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="taskheader">

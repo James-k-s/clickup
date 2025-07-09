@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
   root to: "pages#home"
   get "overview", to: "pages#overview", as: :overview
+  get "settings", to: "pages#settings", as: :settings
   resources :lists, only: [:index, :new, :create, :edit, :update] do
     resources :list_items, only: [:create]
   end

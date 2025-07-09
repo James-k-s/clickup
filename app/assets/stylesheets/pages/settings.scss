@@ -1,0 +1,25 @@
+.setting-container {
+  margin-left: 280px;
+  width: calc(100% - 280px);
+}
+
+
+.heading-container {
+  display: flex;
+  flex-direction: row;
+  padding: 16px;
+  i {
+    font-size: 24px;
+    color: white;
+    margin-right: 16px;
+    align-items: center;
+    text-align: center;
+    padding-top: 6px;
+  }
+}
+
+i {
+  h1,h2,h3,h4,h5,h6,p {
+    color: black !important;
+  }
+}
