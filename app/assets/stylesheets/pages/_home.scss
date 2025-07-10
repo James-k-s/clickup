@@ -333,11 +333,6 @@ body {
 
 }
 
-body, html {
-  overflow: hidden;
-  height: 100%;
-}
-
 .urgent {
   background-color: #F44336;
 
@@ -426,6 +421,8 @@ body, html {
 
 
 .home-container {
+  overflow: hidden;
+  height: 100%;
   position: relative;
   z-index: 1;
   margin: 0;
